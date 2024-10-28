@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if user.photo %}
+        <img src="{{ user.photo.url }}" alt="Profile Photo" style="border-radius: 50%; width: 100px; height: 100px; object-fit: cover; margin-right: 40px;">
+    {% endif %}
+    <ul>
+    {% for message in messages %}
+        <li><b>{{ message.sender }}:</b> {{ message.content }}</li>
+        {% if message.file %}
+        <a href="{{ message.file.url }}">Скачать файл</a>
+        {% endif %}
+    {% endfor %}
+    </ul>
+
+    <p><form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Отправить</button>
+    </form></p>
+{% endblock %}

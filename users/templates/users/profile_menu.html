@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<ul>
+        {% for li in menu %}
+        {% if li.name == 'Мой профиль'%}
+            <li> <a href="{% url li.url user_id=li.cur_user %}"> {{li.name}} </a></li>
+        {% else %}
+            <li><a href="{% url li.url %}"> {{li.name}} </a></li>
+        {% endif %}
+        {% endfor %}
+</ul>
+</head>
+<body>
+
+</body>
+</html>

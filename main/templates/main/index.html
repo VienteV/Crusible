@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="posts">
+    {% for post in query.posts %}
+    <div class="post">
+            <h1> {{ post.title }} </h1>
+            {% if post.photo_main %}
+            <img src="{{ post.photo_main.url }}">
+            {% endif %}
+                <p>{{post.content}}</p>
+        {% if post.photos %}
+        <div class="container">
+            {% for photo in post.photos %}
+                {% if photo %}
+                <img src="{{ photo.url }}" >
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{ post.pk }}">
+            <button type="submit">Like</button>
+        </form> {{post.likes_amount.id__count}}
+        <p><a href="{% url 'post' pk=post.pk %}"> Открыть пост </a></p>
+        {% if post.last_comment %}
+        <p>Коментарии:</p>
+        <p>{{post.last_comment.user}}:{{post.last_comment.text}}</p>
+        {% endif %}
+    </div>
+
+    {% endfor %}
+</div>
+
+</div>
+
+{% endblock %}

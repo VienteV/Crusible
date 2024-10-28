@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="gallery">
+    {% for photo in photos %}
+    <div class="photo-card">
+        <img src="{{ photo.photo.url }}" alt="Фото 1">
+        <div class="description">{{ photo.description }}</div>
+        <div class="buttons">
+            <button class="btn-primary">Изменить описание</button>
+            <form action= "{% url 'dell_photo' photo_id=photo.pk %}" method="POST">
+                {% csrf_token %}
+            <button class="btn-secondary" type="submit">Удалить фото</button>
+            </form>
+
+        </div>
+ </div>
+{% endfor %}
+</div>
+    <div class="photo-card">
+    <a href="{% url 'add_photo' %}" class="description">Добавить фотографию</a>
+    </div>
+{% endblock %}

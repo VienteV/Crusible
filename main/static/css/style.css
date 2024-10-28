@@ -1,0 +1,272 @@
+body{
+margin: 0px;
+border: 0px;
+}
+.menu_li{
+  display: inline-block;
+}
+.menu{
+  display:flex;
+  justify-content:top;
+  flex-direction: row-reverse;
+  background-color: #FAEEDD;
+  background-size: cover;
+  border: 5px solid #EAE0C8; /* Сплошная синяя граница */
+  border-radius: 25px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0px;
+  width: 100%;
+  height: 10%;
+}
+.menu_button{
+    font-size: 20px;
+    display: inline-block; /* Строчно-блочный элемент */
+    background: black; /* Серый цвет фона */
+    color: #fff; /* Белый цвет текста */
+    padding: 1rem 1.5rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */
+    border-radius: 7px; /* Скругляем уголки */
+}
+
+.menu_button:hover {
+  background-color: rgba(255, 0, 0, 1);
+}
+
+.menu_button:active {
+  box-shadow:
+    inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+.right_menu{
+  position: absolute;
+  left: 0;
+  top: 10%;
+  display:flex;
+  justify-content:left;
+  width: 20%;
+  height: 80%;
+  background-color: #FAEEDD;
+  border-right: 5px solid #EAE0C8; /* Сплошная синяя граница */
+}
+.content{
+    position:absolute;
+    left:25%;
+    top:20%;
+    width: 60%;
+    height: 60%;
+    overflow-y: scroll;
+}
+form{
+
+}
+.footer {
+  position: fixed; /* или absolute */
+  bottom: 0;
+  width: 100%;
+  height: 10%;
+  background-color: #FAEEDD;
+  background-size: cover;
+  border: 5px solid #EAE0C8; /* Сплошная синяя граница */
+}
+    .user {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        text-align: center;
+    }
+
+    .avatar {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        object-fit: cover;
+    }
+
+    .user h3 {
+        margin: 0;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .user p {
+        margin: 5px 0;
+        color: #666;
+        font-size: 14px;
+    }
+
+    .user a {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .user a:hover {
+        background-color: #0056b3;
+    }
+
+    /* Основной контейнер профиля */
+.profile-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Основное фото профиля */
+.profile-photo {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-right: 40px;
+}
+
+/* Секция для дополнительных фотографий */
+.additional-photos-container {
+    overflow-x: auto; /* Добавляем горизонтальную прокрутку */
+    white-space: nowrap; /* Запрещаем перенос строк */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.additional-photos {
+    display: flex;
+    align-items: center;
+}
+
+/* Стиль для каждой дополнительной фотографии */
+.additional-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.additional-photo:hover {
+    transform: scale(1.1);/* Увеличение фото при наведении */
+}
+
+/* Стиль для ссылки на добавление фото */
+.profile-container a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.profile-container a:hover {
+    text-decoration: underline;
+}
+
+.posts{
+    display: flex;
+    height: 100%;
+    justify-content: left;
+    position: relative;
+    flex-direction: column;
+
+}
+.posts div{
+    border: 5px solid #EAE0C8; /* Сплошная синяя граница */
+    border-radius: 25px; /* Скругленные углы */
+    padding: 20px; /* Внутренний отступ */
+    width: 80vmin ;/* Ширина блока */
+    margin: 50px auto; /* Выравнивание по центру */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Тень */
+    background-color: #FAEEDD; /* Цвет фона */
+}
+.posts img{
+    height:  auto;
+    width: 30vh;
+}
+.container{
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    max-width: 70vmin; /* Ограничивает ширину до определённого значения */
+    margin: 0 auto;
+}
+.container img {
+    height: 25vh; /* Автоматическая высота для сохранения пропорций */
+    width: auto; /* Задайте желаемую ширину изображений */
+    margin: 5px; /* Отступы вокруг изображений */
+    object-fit: cover; /* Чтобы изображения сохраняли пропорции, но полностью заполняли выделенное пространство */
+    border: 1px solid black;
+}
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .photo-card {
+            flex: 1 1 calc(33.333% - 20px);
+            background-color: white;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .photo-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .description {
+            padding: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .buttons .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        .buttons .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+.photo-card {
+    flex: 1 1 calc(50% - 20px);
+    display: flex; /* Добавляем flexbox для карточки */
+    flex-direction: column; /* Выровняем элементы по вертикали */
+    align-items: center; /* Центрируем элементы по горизонтали */
+    justify-content: center; /* Центрируем элементы по вертикали */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 10px; /* Добавим отступы, чтобы немного отодвинуть от границ */
+}
+.photo-card img {
+    width: 40vh;
+    height: auto; /* Сохраним пропорции изображения */
+}

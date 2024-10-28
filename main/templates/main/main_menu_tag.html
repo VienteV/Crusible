@@ -1,0 +1,21 @@
+<div class='menu'>
+    <ul>
+    {% for li in menu %}
+            <li class='menu_li'><a class="menu_button" href="{% url li.url %}">{{li.name}}</a></li>
+    {% endfor %}
+        {% if user.is_authenticated %}
+        {% for li in menu_if_login %}
+            {% if li.url == 'profile' %}
+                <li class='menu_li'><a class="menu_button" href="{% url li.url user_id=user.pk %}">{{li.name}}</a></li>
+            {% else %}
+                <li class='menu_li'><a class="menu_button" href="{% url li.url %}">{{li.name}}</a></li>
+            {%endif%}
+        {% endfor %}
+        {% else %}
+        {%for li in menu_if_not_login%}
+            <li class='menu_li'><a class="menu_button" href="{% url li.url %}">{{li.name}}</a></li>
+        {% endfor %}
+                {% endif %}
+
+   </ul>
+</div>

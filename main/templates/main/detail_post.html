@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="posts">
+    <div class="post">
+            <h1> {{ post.title }} </h1>
+            {% if post.photo_main %}
+            <img src="{{ post.photo_main.url }}">
+            {% endif %}
+                <p>{{post.content}}</p>
+        {% if post.photos %}
+        <div class="container">
+            {% for photo in post.photos %}
+                {% if photo %}
+                <img src="{{ photo.url }}" >
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{ post.pk }}">
+            <button type="submit">Like</button>
+        </form> {{post.likes_amount.id__count}}
+    <form action="add_comment" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <ul>
+        <input type="hidden" name="post" value="{{ post.pk }}">
+        <input type="hidden" name="user" value="{{ user }}">
+        <li><input type="text" name="text"></li>
+            <li><button type="submit">Send</button></li>
+            </ul>
+    </form>
+        <ul style="list-style: none;">
+        {% for comment in comments %}
+            <li>{{comment.user}}: {{ comment.text}} ({{comment.time_created}})</li>
+        {% endfor %}
+        </ul>
+
+    </div>
+</div>
+{% endblock %}

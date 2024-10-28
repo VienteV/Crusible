@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for chat in chats %}
+    {% if chat.user.photo %}
+        <img src="{{ chat.user.photo.url }}" alt="Profile Photo" style="border-radius: 50%; width: 100px; height: 100px; object-fit: cover; margin-right: 40px;">
+    {% endif %}
+  <a href='{% url "chat"  user_id=chat.user.pk %}'> {{ chat.user }} </a>
+{% endfor %}
+
+{% endblock %}

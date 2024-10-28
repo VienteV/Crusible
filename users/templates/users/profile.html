@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="display: flex; align-items: center; margin-bottom: 20px;">
+    {% if user_profile.photo %}
+        <img src="{{ user_profile.photo.url }}" alt="Profile Photo" style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover; margin-right: 40px;">
+    {% endif %}
+    <div>
+        <h3 style="margin: 0;">{{ user_profile.first_name }} {{ user_profile.last_name }}</h3>
+        <p style="color: #666;">{{ user_profile.date_birth }}</p>
+        <p>{{ user_profile.description }}</p>
+    </div>
+
+</div>
+
+<!-- Секция для дополнительных фотографий -->
+<div class="additional-photos-container">
+    <div class="additional-photos">
+        {% for photo in photos %}
+            <img src="{{ photo.photo.url }}" alt="Additional Photo" class="additional-photo">
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
