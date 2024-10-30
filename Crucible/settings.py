@@ -11,18 +11,23 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import configparser
 from django.conf.global_settings import AUTH_USER_MODEL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+config = configparser.ConfigParser(interpolation=None)
+
+
+config.read('config.ini')
+SECRET_KEY = config.get('Settings', 'SECRET_KEY')
+db_password = config.get('Settings', 'db_password')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-82(@@@#n(6x5cz_xgr%ua$byiesf0%r%3_$#9(lhz4pptu9)l6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,7 +89,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         'NAME': 'crucible_db',
         'user': 'maksim',
-        'password': '4132',
+        'password': db_password,
         'host': 'localhost',
         'port': 5432
     }}
