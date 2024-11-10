@@ -28,13 +28,15 @@ class Register_form(UserCreationForm):
             return cd['email']
 
 class Message_form(forms.ModelForm):
+    file = forms.FileField(label='file',required=False)
+
     class Meta:
         model = Messages
         fields = ['content', 'file']
 
     def clean_content(self):
         content = self.cleaned_data.get('content')
-        if len(content) > 0:
+        if len(content) <= 0:
             raise forms.ValidationError('Message shouldnt be empty')
         else:
             return content

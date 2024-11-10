@@ -35,7 +35,7 @@
             <li>{{comment.user}}: {{ comment.text}} ({{comment.time_created}})</li>
         {% endfor %}
         </ul>
-
+    <a href="{% url 'dell_post' pk=post.pk%}">Удалить пост</a>
     </div>
 </div>
 {% endblock %}

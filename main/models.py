@@ -12,6 +12,7 @@ class Posts(models.Model):
         DRAFT = 0, 'Черновик'
         PUBLISHED = 1, 'Опубликовано'
 
+    autor = models.ForeignKey('users.user', on_delete=models.CASCADE, null=True, related_name='Posts')
     title = models.CharField(max_length=256, verbose_name='Заголовок')
     slug = models.SlugField(max_length=256, verbose_name='Slug')
     photo_main = models.ImageField(upload_to='photos/%Y/%m/d/', blank=True,default=None, null=True, verbose_name='Photo')
@@ -23,10 +24,15 @@ class Posts(models.Model):
     content = models.CharField(max_length=3000, blank=True, verbose_name='Контент')
     is_published = models.BooleanField(choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)),
                                        default=Status.PUBLISHED)
-
+    time_created = models.DateTimeField(auto_now_add=True, null=True)
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    class Meta:
+        ordering=['time_created']
+        verbose_name = 'Post'
+        verbose_name_plural = 'Posts'
 
 class Likes(models.Model):
     post = models.ForeignKey('Posts', on_delete=models.CASCADE, related_name='Likes_post')
@@ -50,3 +56,5 @@ class Comments(models.Model):
 
     class Meta:
         ordering=['time_created']
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'

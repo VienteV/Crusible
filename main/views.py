@@ -26,7 +26,7 @@ class Main_view(ListView):
             i.likes = Likes.objects.filter(post = i.pk)
             i.likes_amount  = Likes.objects.filter(post = i.pk).aggregate(Count('id'))
             i.last_comment = Comments.objects.filter(post=i.pk).last()
-            if not(all(map(lambda a: bool(a), i.photos))):
+            if not(any(map(lambda a: bool(a), i.photos))):
                 i.photos = False
             query = {'posts':posts, 'form': AddCommentForm}
         return query
@@ -71,3 +71,10 @@ def add_comment(request):
     Comments.objects.create(user=user, post=post, text=text)
     print(user, text, post)
     return redirect('post', post_pk)
+
+def dell_post(request, pk):
+    user = get_user_model().objects.get(username=request.user)
+    post = Posts.objects.get(pk=pk)
+    if user == post.autor:
+        post.delete()
+    return redirect('main')

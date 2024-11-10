@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 from django.core.files.uploadedfile import UploadedFile
 from django.db.models import Q
 from django.http import HttpResponse, QueryDict
@@ -54,15 +56,17 @@ def chat(request, user_id):
                 Q(user1=current_user.pk) & Q(user2=user_id) | Q(user1=user_id) & Q(user2=current_user.pk))[0]
 
     if request.method == "POST":
-        content = request.POST['content']
+
+        user_pk = get_user_model().objects.get(username=current_user)
         form = Message_form(request.POST, request.FILES)
-        data = dict(form.data.copy())
-        data = dict(list(data.items()) + list({'chat_id':chat_object, 'sender':current_user, 'is_read':False}.items()))
-        form.data = data
-        form.save()
+        content = form.data['content']
+        file = request.FILES.get('file')
+        file_path = f'uploads/{file.name}'
+        file_name = default_storage.save(file_path, ContentFile(file.read()))
+        Messages.objects.create(chat_id=chat_object, content= content,
+                                sender = user_pk, is_read=False, file=file_name )
         #Messages.objects.create(chat_id=chat_object, content=content, sender=current_user, file=file, is_read=False)
         return redirect('chat', user_id=user_id)
-
     else:
         form = Message_form
     messages = Messages.objects.filter(chat_id = chat_object.pk)
@@ -85,7 +89,7 @@ class AddPhoto(CreateView):
 
     def form_valid(self, form):
         p = form.save(commit=False)
-        print(self.request.user, 'aaaaa')
+
         p.user = self.request.user
         return super().form_valid(form)
 

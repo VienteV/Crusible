@@ -31,7 +31,7 @@ class Messages(models.Model):
     chat_id = models.ForeignKey("Chat", on_delete=models.CASCADE, related_name="chat")
     content = models.CharField(max_length=1000, null=False)
     sender = models.ForeignKey("User", on_delete=models.CASCADE,related_name='Sender')
-    is_read = models.BooleanField()
+    is_read = models.BooleanField(null=True)
     file = models.FileField(upload_to='photos/users/', null=True, default=False, verbose_name='Файл')
     time_sended = models.DateTimeField(auto_now_add=True, null=True)
 
