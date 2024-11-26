@@ -33,6 +33,7 @@
         <ul style="list-style: none;">
         {% for comment in comments %}
             <li>{{comment.user}}: {{ comment.text}} ({{comment.time_created}})</li>
+            <a href="{% url 'add_like_to_comment' post_id=post.pk comment_id=comment.pk %}">like</a>
         {% endfor %}
         </ul>
     <a href="{% url 'dell_post' pk=post.pk%}">Удалить пост</a>

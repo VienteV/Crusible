@@ -39,7 +39,6 @@ class Likes(models.Model):
     user = models.ForeignKey('users.User',  on_delete=models.CASCADE, related_name='Likes_user')
 
     def save(self, *args, **kwargs):
-        print(self.post, self.user)
         if self.__class__.objects.filter(post=self.post, user=self.user).exists():
             self.__class__.objects.filter(post=self.post, user=self.user).delete()
             raise Exception("Запись с такими значениями уже существует")
@@ -47,7 +46,6 @@ class Likes(models.Model):
             super().save(*args, **kwargs)
 
 class Comments(models.Model):
-
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='Coment_user')
     post = models.ForeignKey('Posts', on_delete=models.CASCADE, related_name='Coment_post')
     text = models.CharField(max_length=500, verbose_name='Text')
@@ -58,3 +56,13 @@ class Comments(models.Model):
         ordering=['time_created']
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'
+
+class Comments_likes(models.Model):
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='comments_likes_user')
+    comment = models.ForeignKey('Comments', on_delete=models.CASCADE, related_name='comments_likes_comment')
+
+    def save(self, *args, **kwargs):
+        if self.__class__.objects.filter(comment=self.comment, user=self.user).exists():
+            raise Exception("Запись с такими значениями уже существует")
+        else:
+            super().save(*args, **kwargs)

@@ -5,6 +5,7 @@ from django.contrib.auth.views import LoginView
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.core.files.uploadedfile import UploadedFile
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import HttpResponse, QueryDict
 from django.shortcuts import render, redirect
@@ -69,8 +70,11 @@ def chat(request, user_id):
         return redirect('chat', user_id=user_id)
     else:
         form = Message_form
-    messages = Messages.objects.filter(chat_id = chat_object.pk)
+    messages = Paginator(Messages.objects.filter(chat_id = chat_object.pk), 5)
+
     user = get_user_model().objects.get(pk=user_id)
+
+
     return render(request, 'users/chat.html', context={'chat':chat_object, 'messages': messages, 'form':form, 'user':user})
 
 class LoginUser(LoginView):

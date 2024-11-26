@@ -4,7 +4,7 @@
         <img src="{{ user.photo.url }}" alt="Profile Photo" style="border-radius: 50%; width: 100px; height: 100px; object-fit: cover; margin-right: 40px;">
     {% endif %}
     <ul>
-    {% for message in messages %}
+    {% for message in messages.get_page.1.object_list %}
         <li><b>{{ message.sender }}:</b> {{ message.content }}</li>
         {% if message.file %}
         <a href="{{ message.file.url }}">Скачать файл</a>

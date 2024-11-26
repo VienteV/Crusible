@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 
 from .forms import AddPostForm, AddCommentForm
-from .models import Posts, Likes, Comments
+from .models import Posts, Likes, Comments, Comments_likes
 
 
 # Create your views here.
@@ -52,6 +52,7 @@ class Post_view(DetailView):
     template_name = 'main/detail_post.html'
     context_object_name = 'post'
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = AddCommentForm
@@ -78,3 +79,10 @@ def dell_post(request, pk):
     if user == post.autor:
         post.delete()
     return redirect('main')
+
+def like_comment(request, post_id, comment_id):
+    try:
+        Comments_likes.objects.create(user=request.user, comment=Comments.objects.get(pk=comment_id))
+    except:
+        Comments_likes.objects.get(user=request.user, comment=Comments.objects.get(pk=comment_id)).delete
+    return redirect('post', pk=post_id)
